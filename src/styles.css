@@ -4,7 +4,6 @@
   }
 
 #root{
-  background-color: rgb(56, 56, 56);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -14,16 +13,15 @@
   width: 20vw;
 }
 #right{
-  border: black dashed;
   width: 50vw;
   display: flex;
   flex-direction: column;
 }
 #top{
-  border: blue dashed;
+  border: black solid;
   height: 50%;
 }
 #bottom{
-  border: violet dashed;
+  border: black solid;
   height: 50%;
 }
