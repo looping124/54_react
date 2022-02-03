@@ -1,28 +1,43 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
-import NoteDisplay from '../NoteDisplay/noteDisplay.jsx'
-import MarkdownInput from '../MarkdownInput/markdownInput.jsx'
+import ShowNote from '../ShowNote/showNote.jsx'
+import './styles.css';
 
-function Menu({notes}){
-  function newNote(event){
-    console.log('TEST');
-    let newNote = {key:'New Note',value:'New Content'}
-    ReactDOM.render(<NoteDisplay note={newNote}/>, document.getElementById("top"));
-    ReactDOM.render(<MarkdownInput note={newNote}/>, document.getElementById("bottom"));
+function getLocalStorageNotes(){
+  let notes = [];
+  for (let index = 0; index < localStorage.length; index++) {
+    const key = localStorage.key(index);
+    const value = localStorage.getItem(key);
+    notes.push({key,value});
   }
+  return notes
+}
+
+function Menu(){
+  const [notes, setnotes] = useState(getLocalStorageNotes());
+  function handleSave(){
+    setnotes(getLocalStorageNotes())
+  }
+
+  function newNote(event){
+    // event.preventDefault();
+    // let newNote = {key:'New Note',value:'New Content'}
+    // localStorage.setItem(newNote.key, newNote.value);
+    // ReactDOM.render(<ShowNote note={newNote}/>, document.getElementById("right"));
+  }
+
   function handleClick(e,note) {
     e.preventDefault();
-    ReactDOM.render(<NoteDisplay note={note}/>, document.getElementById("top"));
-    ReactDOM.render(<MarkdownInput note={note}/>, document.getElementById("bottom"));
+    ReactDOM.render(<ShowNote note={note} onSave={handleSave}/>, document.getElementById("right"));
   }
-  let notesDisplay = notes.map(note =>
-  <div key={note.key} onClick={(e)=>handleClick(e,note)}>
-    <h3>{note.key}</h3>
-    <p>{note.value}</p>    
-  </div>)
+
   
   return <div>
-    {notesDisplay}
+    {notes.map(note =>
+    <div key={note.key} onClick={(e)=>{handleClick(e,note)}} className='noteMenu'>
+      <h3>{note.key}</h3>
+      <p>{note.value}</p>    
+    </div>)}
     <button onClick={(event)=>newNote(event)}>New note</button>
   </div>
 }
