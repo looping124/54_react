@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  }
+
+#root{
+  background-color: rgb(56, 56, 56);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+#left{
+  border: black solid;
+  width: 20vw;
+}
+#right{
+  border: black dashed;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+}
+#top{
+  border: blue dashed;
+  height: 50%;
+}
+#bottom{
+  border: violet dashed;
+  height: 50%;
+}
