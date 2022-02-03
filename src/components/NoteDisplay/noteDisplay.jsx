@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 function NoteDisplay({note}) {
   return (
     <div>

@@ -1,5 +1,5 @@
 import './styles.css';
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import Menu from './components/Menu/menu.jsx'
 import NoteDisplay from './components/NoteDisplay/noteDisplay.jsx'
@@ -21,7 +21,6 @@ function App() {
         <div id="top">
         </div>
         <div id="bottom">
-          <MarkdownInput/>
         </div>
       </div>
     </>
