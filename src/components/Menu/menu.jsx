@@ -19,27 +19,47 @@ function Menu(){
     setnotes(getLocalStorageNotes())
   }
 
+
   function newNote(event){
     // event.preventDefault();
     // let newNote = {key:'New Note',value:'New Content'}
     // localStorage.setItem(newNote.key, newNote.value);
     // ReactDOM.render(<ShowNote note={newNote}/>, document.getElementById("right"));
+    window.location.reload();
+  }
+
+  const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
+  function onChangeValue(event){
+    console.log(event.target.value);
+    setContent(event.target.value)
+  }
+  function onChangeTitle(event){
+    console.log(event.target.value);
+    setTitle(event.target.value)
   }
 
   function handleClick(e,note) {
     e.preventDefault();
-    ReactDOM.render(<ShowNote note={note} onSave={handleSave}/>, document.getElementById("right"));
+    setContent(note.value)
+    setTitle(note.key)
+    // ReactDOM.render(<ShowNote content={content}  title={title}onSave={handleSave} onChangeValue={onChangeValue}/>, document.getElementById("right"));
   }
 
   
-  return <div>
-    {notes.map(note =>
+  return <>
+<div id="left">
+{notes.map(note =>
     <div key={note.key} onClick={(e)=>{handleClick(e,note)}} className='noteMenu'>
       <h3>{note.key}</h3>
       <p>{note.value}</p>    
     </div>)}
     <button onClick={(event)=>newNote(event)}>New note</button>
   </div>
+    <div id="right">
+    <ShowNote content={content}  title={title}onSave={handleSave} onChangeValue={onChangeValue} onChangeTitle={onChangeTitle}/>
+  </div>
+</>
 }
   
 

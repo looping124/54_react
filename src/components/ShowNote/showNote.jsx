@@ -1,44 +1,43 @@
 import './styles.css';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import NoteDisplay from '../NoteDisplay/noteDisplay.jsx'
 
 
-function ShowNote({note,onSave}) {
-  const [content, setContent] = useState(note.value);
-  const [title, setTitle] = useState(note.key);
+function ShowNote({content, title,onSave,onChangeValue,onChangeTitle}) {
+
+  // const [content, setContent] = useState(note.value);
+  // const [title, setTitle] = useState(note.key);
+    useEffect(() => {
+      console.log(title, content)
+    }, [title, content]);
+
 
   function saveContent(event){
-    console.log(content);
-    console.log(title);
     event.preventDefault()
     localStorage.setItem(title,content)
     onSave()
   }
 
   function changeContent(event){
-    const value = event.target.value
-    console.log(value);
-    setContent(value)
+    onChangeValue(event)
   }
   
   function saveTitle(event){
-    console.log(title);
+
     event.preventDefault()
-    localStorage.setItem(note.key,title)
+    localStorage.setItem(content,title)
     onSave()
   }
 
   function changeTitle(event){
-    const titleValue = event.target.value
-    console.log(titleValue);
-    setTitle(titleValue)
+    onChangeTitle(event)
   }
 
   return (
     <>
       <div id="top">
-        <h1>{note.key}</h1>
+        <h1>{title}</h1>
         <p>{content}</p>
     </div>
       <div id="bottom">

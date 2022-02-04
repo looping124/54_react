@@ -10,11 +10,7 @@ function App() {
 
   return (
     <>
-      <div id="left">
         <Menu/>
-      </div>
-      <div id="right">
-      </div>
     </>
   );
 }
